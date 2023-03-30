@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  psql:
+    image: postgres:15.1-alpine
+    environment:
+      - POSTGRES_USER=priceuser
+      - POSTGRES_PASSWORD=nosecret
+      - POSTGRES_DB=pricedb
+    ports:
+      - '5432:5432'
+    volumes:
+      - "./database/postgres/docker-entrypoint-initdb/extension.sql:/docker-entrypoint-initdb.d/extension.sql"
+
+volumes:
+  db:
+    driver: local
